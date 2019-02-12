@@ -26,6 +26,13 @@ fi
 export GOPATH=/go
 export PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
+GOSRCDIR="/go/src/$PACKAGE"
+if [ "$SRCDIR" != "" -a "$SRCDIR" != "$GOSRCDIR" ]
+then
+	mkdir -p $(dirname "$GOSRCDIR")
+	ln -s "$SRCDIR" "$GOSRCDIR"
+fi
+
 cd /go/src/$PACKAGE
 
 # Run dep or glide if necessary (dep takes precedence)
